@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Javascript Calculator</title>
+    <style>
+        body{
+            background-color: azure;
+            width: 100%;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .container{
+            background: #fff;
+            padding: 2rem;
+            text-align: center;
+            border-radius: 10px;
+            box-shadow: 0px 0px 5px rgba(0,0,0,0.2);
+        }
+        .calculator #display{
+            outline: none;
+            border: none;
+            border-radius: 10px;
+            width: 90%;
+            margin-bottom: 2rem;
+            padding: 1rem 1rem;
+            box-shadow: 0px 0px 5px rgba(0,0,0,0.2);
+            text-align: right;
+            font-size: 1.5rem;
+        }
+        .btn-function{
+            display: grid;
+            grid-template-areas: "operator operator operator operator"
+                                  "number number number equal"
+                                  "number number number equal"
+                                  "number number number equal";
+            align-items: center;
+            gap: 1rem;
+        }
+        .operator{
+            grid-area: operator;
+            display: grid;
+            grid-template-columns: repeat(4,1fr);
+            gap: 1rem;
+        }
+        .number{
+            grid-area: number;
+            display: grid;
+            grid-template-columns: repeat(3,1fr);
+            gap: 1rem;
+        }
+        .equal{
+            grid-area: equal;
+            height: 100%;
+        }
+        .equal .equal-btn{
+            height: 100%;
+            width: 100%;
+        }
+        .btn-function .btn,
+        .equal-btn,
+        .close{
+            padding: .8rem;
+            font-size: 1.5rem;
+            outline: none;
+            border: none;
+            border-radius: 10px;
+            box-shadow: 0 0 5px rgba(0,0,0,0.2);
+            background-color: azure;
+            cursor: pointer;
+        }
+        .close{
+            background-color: rgb(146, 0, 58);
+            color: white;
+        }
+        .equal-btn{
+            background-color: purple;
+            color: white;
+        }
+        .operator .btn{
+            color: white;
+            background-color: blueviolet;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Javascript Calculator</h1>
+        <div class="calculator">
+            <input type="text" name="display" id="display" class="display">
+            <div class="btn-function">
+                <div class="operator">
+                    <button class="btn" value="+">+</button>
+                    <button class="btn" value="-">-</button>
+                    <button class="btn" value="*">x</button>
+                    <button class="btn" value="/">&#247;</button>
+                </div>
+                <div class="number">
+                    <button class="btn" value="7">7</button>
+                    <button class="btn" value="8">8</button>
+                    <button class="btn" value="9">9</button>
+                    <button class="btn" value="4">4</button>
+                    <button class="btn" value="5">5</button>
+                    <button class="btn" value="6">6</button>
+                    <button class="btn" value="1">1</button>
+                    <button class="btn" value="2">2</button>
+                    <button class="btn" value="3">3</button>
+                    <button class="btn" value="0">0</button>
+                    <button class="btn" value=".">.</button>
+                    <button class="close">C</button>
+                </div>
+                <div class="equal">
+                    <button class="equal-btn"> = </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        let display = document.querySelector('.display');
+        let btn = document.querySelectorAll('.btn');
+        let equal = document.querySelector('.equal');
+        let close = document.querySelector('.close');
+        
+        function calculator() {
+            display.addEventListener('input',()=>{
+            var value = display.value
+            });
+            var value = '';
+            btn.forEach((e)=>{
+                e.addEventListener('click',()=>{
+                     value += e.value;
+                     display.value = value;
+                })
+            })
+            equal.addEventListener('click',()=>{
+                var result = eval(value)
+                display.value = result;
+            })
+            close.addEventListener('click',()=>{
+                value = '';
+                display.value = value;
+            })
+        }
+        window.onload = calculator();
+    </script>
+    
+</body>
+</html>
